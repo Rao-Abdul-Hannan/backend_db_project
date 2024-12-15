@@ -1,11 +1,14 @@
 const express = require('express');
 const { connectToSqlDb } = require('./config/sqlConfig/sqlConfig');
 const apiRouter = require('./routes/apiRoutes/apiRoutes');
+const cors = require("cors");
 const app = express();
 
 app.use(express.json())
 
 const PORT = 8000;
+
+app.use(cors());
 
 // test req
 app.get(`/`, (req, res)=>{
