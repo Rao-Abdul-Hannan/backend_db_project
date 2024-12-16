@@ -3,7 +3,6 @@ const readAllStudentsController = require('../../../controllers/readControllers/
 const readAllTeachersController = require("../../../controllers/readControllers/readAllTeachersController");
 const readSpecificTeacherController = require("../../../controllers/readControllers/readSpecificTeacherController");
 const readSpecificStudentController = require("../../../controllers/readControllers/readSpecificStudentController");
-const readSpecificStudentController = require("../../../controllers/readControllers/readSpecificStudentController");
 const readAdmissionDataController = require("../../../controllers/readControllers/readAdmissionDataController");
 const readAttendanceDataController = require("../../../controllers/readControllers/readAttendanceDataController");
 const readClassRoomDataController = require('../../../controllers/readControllers/readClassRoomDataController');

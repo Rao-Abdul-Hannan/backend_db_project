@@ -1,7 +1,7 @@
 const { connection } = require("../../config/sqlConfig/sqlConfig");
 
 const readRoomDataController = (req, res) => {
-	const query = "SELECT * FROM period";
+	const query = "SELECT * FROM room";
 
 	connection.query(query, (err, results) => {
 		if (err) {

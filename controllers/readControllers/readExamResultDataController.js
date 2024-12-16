@@ -1,7 +1,7 @@
 const { connection } = require("../../config/sqlConfig/sqlConfig");
 
 const readExamResultDataController = (req, res) => {
-	const query = "SELECT * FROM teacher";
+	const query = "SELECT * FROM exam_result";
 
 	connection.query(query, (err, results) => {
 		if (err) {
