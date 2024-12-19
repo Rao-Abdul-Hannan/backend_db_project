@@ -1,9 +1,8 @@
 const { connection } = require("../../config/sqlConfig/sqlConfig");
 
 const readSpecificStudentController = (req, res) => {
-	const { student_id } = req.params; // Get `student_id` from the URL parameters
+	const { student_id } = req.params;
 
-	// Validate `student_id`
 	if (!student_id || isNaN(student_id)) {
 		return res.status(400).json({
 			success: false,
@@ -11,7 +10,6 @@ const readSpecificStudentController = (req, res) => {
 		});
 	}
 
-	// SQL query to fetch the student data by `student_id`
 	const query = `SELECT * FROM student WHERE student_id = ?`;
 
 	connection.query(query, [student_id], (err, results) => {
@@ -33,7 +31,7 @@ const readSpecificStudentController = (req, res) => {
 
 		return res.status(200).json({
 			success: true,
-			data: results[0], // Return the specific student's data
+			data: results[0], 
 		});
 	});
 };

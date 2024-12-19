@@ -22,6 +22,10 @@ const readStudentCoursesController = require('../../../controllers/readControlle
 const readTeacherTeachingSectionsController = require('../../../controllers/readControllers/readTeacherTeachingSections');
 const readStudentParticipationsController = require('../../../controllers/readControllers/readStudentParticipationsController');
 const createStudentController = require('../../../controllers/writeControllers/createStudentController');
+const createTeacherController = require('../../../controllers/writeControllers/createTeacherController');
+const createEventController = require('../../../controllers/writeControllers/createEventController');
+const adminSignUpController = require('../../../controllers/writeControllers/adminSignUpController');
+const adminSignInController = require('../../../controllers/writeControllers/adminSignInController');
 
 const v1Router = express.Router()
 
@@ -52,6 +56,10 @@ v1Router.get("/student-participations", readStudentParticipationsController);
 
 //Write Controllers
 v1Router.post(`/add-student`, createStudentController)
+v1Router.post(`/add-teacher`, createTeacherController)
+v1Router.post(`/add-event`, createEventController)
+v1Router.post(`/auth/sign-up`, adminSignUpController);
+v1Router.post("/auth/sign-in", adminSignInController);
 
 
 module.exports = v1Router

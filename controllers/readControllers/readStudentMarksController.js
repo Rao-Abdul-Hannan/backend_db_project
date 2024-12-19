@@ -3,7 +3,6 @@ const { connection } = require("../../config/sqlConfig/sqlConfig");
 const readStudentMarksController = (req, res) => {
 	const { marks, student_id } = req.params;
 
-	// Validate required parameters
 	if (!marks || isNaN(marks) || !student_id || isNaN(student_id)) {
 		return res.status(400).json({
 			success: false,

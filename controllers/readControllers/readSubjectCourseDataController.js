@@ -1,4 +1,4 @@
-// controllers/readAllStudentsController.js
+
 const { connection } = require("../../config/sqlConfig/sqlConfig");
 
 const readSubjectCourseDataController = (req, res) => {

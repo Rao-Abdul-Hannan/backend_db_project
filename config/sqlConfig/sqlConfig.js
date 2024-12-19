@@ -1,12 +1,15 @@
-// config/sqlConfig/sqlConfig.js
 const mysql = require("mysql2");
 
 const dbConfig = {
     host: "localhost",
     user: "root",
     password: "",
-    database: "school",
+    database: "school"
 };
+
+const dotEnv = require("dotenv");
+const config = dotEnv.config;
+config();
 
 const connection = mysql.createConnection(dbConfig);
 

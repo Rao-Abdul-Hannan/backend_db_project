@@ -1,10 +1,8 @@
 const { connection } = require("../../config/sqlConfig/sqlConfig");
 
 const readTeacherTeachingSectionsController = (req, res) => {
-	// Capture the teacher_id from the URL parameters
 	const teacher_id = req.params.t_id;
 
-	// Validate teacher_id
 	if (!teacher_id) {
 		return res.status(400).json({
 			success: false,
@@ -12,7 +10,6 @@ const readTeacherTeachingSectionsController = (req, res) => {
 		});
 	}
 
-	// SQL query to fetch teaching sections for a specific teacher
 	const query = `
         SELECT 
             t.firstname AS teacher_first_name,
@@ -34,7 +31,6 @@ const readTeacherTeachingSectionsController = (req, res) => {
             t.t_id = ?;
     `;
 
-	// Run the query with the teacher_id as a parameter
 	connection.query(query, [teacher_id], (err, result) => {
 		if (err) {
 			console.error("Error fetching teacher's teaching sections:", err);
@@ -45,7 +41,6 @@ const readTeacherTeachingSectionsController = (req, res) => {
 			});
 		}
 
-		// Check if any data was returned
 		if (result.length === 0) {
 			return res.status(404).json({
 				success: false,
@@ -53,7 +48,6 @@ const readTeacherTeachingSectionsController = (req, res) => {
 			});
 		}
 
-		// Send back the results
 		return res.status(200).json({
 			success: true,
 			data: result,

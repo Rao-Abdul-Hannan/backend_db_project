@@ -2,18 +2,17 @@ const { connection } = require("../../config/sqlConfig/sqlConfig");
 
 const createStudentController = (req, res) => {
 	const {
-		student_id, // Accept `student_id` from the user
+		student_id,
 		s_first_name,
 		s_middle_name,
 		s_last_name,
 		s_address,
 		section_id,
 		date_of_birth,
-		gender,
-		status,
+		Gender,
+		Status
 	} = req.body;
 
-	// Validate required fields
 	if (
 		!student_id ||
 		!s_first_name ||
@@ -21,8 +20,8 @@ const createStudentController = (req, res) => {
 		!s_address ||
 		!section_id ||
 		!date_of_birth ||
-		!gender ||
-		!status
+		!Gender ||
+		!Status
 	) {
 		return res.status(400).json({
 			success: false,
@@ -30,19 +29,24 @@ const createStudentController = (req, res) => {
 		});
 	}
 
-	// Ensure `student_id` is a valid integer
-	if (!Number.isInteger(student_id)) {
+	if (section_id < 1 || section_id > 11) {
 		return res.status(400).json({
 			success: false,
-			message: "Invalid student_id. It must be an integer.",
+			message: "Section ID must be between 1 and 11",
 		});
 	}
 
-	// SQL query to insert a new student
+	// if (!Number.isInteger(student_id)) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		message: "Invalid student_id. It must be an integer.",
+	// 	});
+	// }
+
 	const query = `
         INSERT INTO student (
             student_id, s_first_name, s_middle_name, s_last_name,
-            s_address, section_id, date_of_birth, gender, status
+            s_address, section_id, date_of_birth, Gender, Status
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
@@ -54,13 +58,14 @@ const createStudentController = (req, res) => {
 		s_address,
 		section_id,
 		date_of_birth,
-		gender,
-		status,
+		Gender,
+		Status,
 	];
 
 	connection.query(query, values, (err, result) => {
 		if (err) {
 			console.error("Error adding student:", err);
+			x;
 			return res.status(500).json({
 				success: false,
 				message: "Failed to add student",

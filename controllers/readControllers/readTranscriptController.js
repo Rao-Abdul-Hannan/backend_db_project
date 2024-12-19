@@ -1,7 +1,7 @@
 const { connection } = require("../../config/sqlConfig/sqlConfig");
 
 const readTranscriptController = (req, res) => {
-	const { student_id } = req.params; // Get the student_id from URL params
+	const { student_id } = req.params; 
 
 	if (!student_id) {
 		return res.status(400).json({
@@ -10,7 +10,6 @@ const readTranscriptController = (req, res) => {
 		});
 	}
 
-	// SQL query to fetch the transcript
 	const query = `
         SELECT 
             s.student_id,

@@ -1,7 +1,6 @@
 const { connection } = require("../../config/sqlConfig/sqlConfig");
 
 const readStudentParticipationsController = (req, res) => {
-	// SQL query to fetch distinct student names who participated in events
 	const query = `
         SELECT DISTINCT 
             CONCAT(s.s_first_name, ' ', s.s_last_name) AS student_name,
@@ -14,7 +13,6 @@ const readStudentParticipationsController = (req, res) => {
             Student_Event se ON s.student_id = se.student_id;
     `;
 
-	// Execute the query
 	connection.query(query, (err, results) => {
 		if (err) {
 			console.error("Error fetching student participations:", err);
@@ -25,7 +23,6 @@ const readStudentParticipationsController = (req, res) => {
 			});
 		}
 
-		// Check if any data was returned
 		if (results.length === 0) {
 			return res.status(404).json({
 				success: false,
@@ -33,7 +30,6 @@ const readStudentParticipationsController = (req, res) => {
 			});
 		}
 
-		// Send back the results
 		return res.status(200).json({
 			success: true,
 			data: results,
