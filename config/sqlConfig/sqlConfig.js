@@ -4,7 +4,8 @@ const dbConfig = {
     host: "localhost",
     user: "root",
     password: "",
-    database: "school"
+    database: "school",
+    port: 3306
 };
 
 const dotEnv = require("dotenv");

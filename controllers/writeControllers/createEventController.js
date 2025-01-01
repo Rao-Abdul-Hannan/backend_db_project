@@ -44,7 +44,7 @@ const createEventController = (req, res) => {
 		event_name,
 		starting_date,
 		ending_date,
-		location,
+		location
 	];
 
 	connection.query(query, values, (err, result) => {

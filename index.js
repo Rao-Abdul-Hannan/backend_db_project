@@ -10,7 +10,7 @@ const PORT = 8000;
 
 app.use(cors());
 
-// test req
+// test reqxa
 app.get(`/`, (req, res)=>{
     return res.send(
         "<h1>hello </h1>"

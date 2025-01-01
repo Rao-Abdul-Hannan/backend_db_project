@@ -13,21 +13,21 @@ const createStudentController = (req, res) => {
 		Status
 	} = req.body;
 
-	if (
-		!student_id ||
-		!s_first_name ||
-		!s_last_name ||
-		!s_address ||
-		!section_id ||
-		!date_of_birth ||
-		!Gender ||
-		!Status
-	) {
-		return res.status(400).json({
-			success: false,
-			message: "Missing required fields",
-		});
-	}
+	// if (
+	// 	!student_id ||
+	// 	!s_first_name ||
+	// 	!s_last_name ||
+	// 	!s_address ||
+	// 	!section_id ||
+	// 	!date_of_birth ||
+	// 	!Gender ||
+	// 	!Status
+	// ) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		message: "Missing required fields",
+	// 	});
+	// }
 
 	if (section_id < 1 || section_id > 11) {
 		return res.status(400).json({
@@ -59,7 +59,7 @@ const createStudentController = (req, res) => {
 		section_id,
 		date_of_birth,
 		Gender,
-		Status,
+		Status
 	];
 
 	connection.query(query, values, (err, result) => {

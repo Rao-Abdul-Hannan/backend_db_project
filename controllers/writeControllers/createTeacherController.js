@@ -15,24 +15,24 @@ const createTeacherController = (req, res) => {
         DateOfJoining
 	} = req.body;
 
-	if (
-		!t_id ||
-		!FirstName ||
-		!LastName ||
-		!DateOfBirth ||
-		!Gender ||
-		!Email ||
-		!PhoneNumber ||
-		!Address ||
-		!Salary ||
-		!Status ||
-		!DateOfJoining
-	) {
-		return res.status(400).json({
-			success: false,
-			message: "Missing required fields",
-		});
-	}
+	// if (
+	// 	!t_id ||
+	// 	!FirstName ||
+	// 	!LastName ||
+	// 	!DateOfBirth ||
+	// 	!Gender ||
+	// 	!Email ||
+	// 	!PhoneNumber ||
+	// 	!Address ||
+	// 	!Salary ||
+	// 	!Status ||
+	// 	!DateOfJoining
+	// ) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		message: "Missing required fields",
+	// 	});
+	// }
 
 	// if (!Number.isInteger(t_id)) {
 	// 	return res.status(400).json({
