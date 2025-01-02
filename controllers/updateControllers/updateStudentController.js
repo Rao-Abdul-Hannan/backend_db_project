@@ -1,6 +1,6 @@
 const { connection } = require("../../config/sqlConfig/sqlConfig");
 
-const createStudentController = (req, res) => {
+const updateStudentController = (req, res) => {
 	const {
 		student_id,
 		s_first_name,
@@ -10,7 +10,7 @@ const createStudentController = (req, res) => {
 		section_id,
 		date_of_birth,
 		Gender,
-		Status
+		Status,
 	} = req.body;
 
 	if (
@@ -51,11 +51,19 @@ const createStudentController = (req, res) => {
 	}
 
 	const query = `
-        INSERT INTO student (
-            student_id, s_first_name, s_middle_name, s_last_name,
-            s_address, section_id, date_of_birth, Gender, Status
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+    UPDATE student 
+    SET 
+        s_first_name = ?, 
+        s_middle_name = ?, 
+        s_last_name = ?, 
+        s_address = ?, 
+        section_id = ?, 
+        date_of_birth = ?, 
+        Gender = ?, 
+        Status = ?
+    WHERE 
+        student_id = ?
+`;
 
 	const values = [
 		student_id,
@@ -66,25 +74,25 @@ const createStudentController = (req, res) => {
 		section_id,
 		date_of_birth,
 		Gender,
-		Status
+		Status,
 	];
 
 	connection.query(query, values, (err, result) => {
 		if (err) {
-			console.error("Error adding student:", err);
+			console.error("Error updating student:", err);
 			return res.status(500).json({
 				success: false,
-				message: "Failed to add student",
+				message: "Failed to update student",
 				error: err.message,
 			});
 		}
 
 		return res.status(201).json({
 			success: true,
-			message: "Student added successfully",
+			message: "Student updated successfully",
 			data: { student_id },
 		});
 	});
 };
 
-module.exports = createStudentController;
+module.exports = updateStudentController;

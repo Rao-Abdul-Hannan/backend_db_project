@@ -26,6 +26,12 @@ const createTeacherController = require('../../../controllers/writeControllers/c
 const createEventController = require('../../../controllers/writeControllers/createEventController');
 const adminSignUpController = require('../../../controllers/writeControllers/adminSignUpController');
 const adminSignInController = require('../../../controllers/writeControllers/adminSignInController');
+const deleteStudentController = require('../../../controllers/deleteControllers/deleteStudentController');
+const deleteTeacherController = require('../../../controllers/deleteControllers/deleteTeacherController');
+const deleteEventController = require('../../../controllers/deleteControllers/deleteEventController');
+const updateStudentController = require('../../../controllers/updateControllers/updateStudentController');
+const updateTeacherController = require('../../../controllers/updateControllers/updateTeacherController');
+const updateEventController = require('../../../controllers/updateControllers/updateEventController');
 
 const v1Router = express.Router()
 
@@ -60,6 +66,16 @@ v1Router.post(`/add-teacher`, createTeacherController)
 v1Router.post(`/add-event`, createEventController)
 v1Router.post(`/auth/sign-up`, adminSignUpController);
 v1Router.post("/auth/sign-in", adminSignInController);
+
+//Delete Controllers
+v1Router.delete(`/delete-student/:student_id`, deleteStudentController)
+v1Router.delete(`/delete-teacher/:t_id`, deleteTeacherController)
+v1Router.delete(`/delete-event/:event_id`, deleteEventController)
+
+//Update Controllers
+v1Router.post("/update-student", updateStudentController)
+v1Router.post("/update-teacher", updateTeacherController)
+v1Router.post("/update-event", updateEventController)
 
 
 module.exports = v1Router

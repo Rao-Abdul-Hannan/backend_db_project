@@ -1,6 +1,6 @@
 const { connection } = require("../../config/sqlConfig/sqlConfig");
 
-const createTeacherController = (req, res) => {
+const updateTeacherController = (req, res) => {
 	const {
 		t_id,
 		FirstName,
@@ -10,9 +10,9 @@ const createTeacherController = (req, res) => {
 		Email,
 		PhoneNumber,
 		Address,
-        Salary,
-        Status,
-        DateOfJoining
+		Salary,
+		Status,
+		DateOfJoining,
 	} = req.body;
 
 	if (
@@ -38,9 +38,8 @@ const createTeacherController = (req, res) => {
 	const dob = new Date(DateOfBirth);
 	const doj = new Date(DateOfJoining);
 
-	// Check if the teacher is at least 20 years old
 	const age = currentDate.getFullYear() - dob.getFullYear();
-	if (age < 20 ) {
+	if (age < 20) {
 		return res.status(400).json({
 			success: false,
 			message: "Teacher's age must be greater than 20 years",
@@ -60,22 +59,23 @@ const createTeacherController = (req, res) => {
 			message: "Salary cannot be negative",
 		});
 	}
-	
+
 	const query = `
-        INSERT INTO teacher (
-        t_id,
-		FirstName,
-		LastName,
-		DateOfBirth,
-		Gender,
-		Email,
-		PhoneNumber,
-		Address,
-        Salary,
-        Status,
-        DateOfJoining
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+    UPDATE teacher 
+    SET 
+        FirstName = ?, 
+        LastName = ?, 
+        DateOfBirth = ?, 
+        Gender = ?, 
+        Email = ?, 
+        PhoneNumber = ?, 
+        Address = ?, 
+        Salary = ?, 
+        Status = ?, 
+        DateOfJoining = ?
+    WHERE 
+        t_id = ?
+`;
 
 	const values = [
 		t_id,
@@ -96,17 +96,17 @@ const createTeacherController = (req, res) => {
 			console.error("Error adding teacher:", err);
 			return res.status(500).json({
 				success: false,
-				message: "Failed to add teacher",
+				message: "Failed to update teacher",
 				error: err.message,
 			});
 		}
 
 		return res.status(201).json({
 			success: true,
-			message: "Teacher added successfully",
+			message: "Teacher updated successfully",
 			data: { t_id },
 		});
 	});
 };
 
-module.exports = createTeacherController;
+module.exports = updateTeacherController;

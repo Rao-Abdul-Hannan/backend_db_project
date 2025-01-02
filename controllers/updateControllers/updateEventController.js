@@ -1,13 +1,8 @@
 const { connection } = require("../../config/sqlConfig/sqlConfig");
 
-const createEventController = (req, res) => {
-	const {
-		event_id,
-		event_name,
-		starting_date,
-		ending_date,
-		location
-	} = req.body;
+const updateEventController = (req, res) => {
+	const { event_id, event_name, starting_date, ending_date, location } =
+		req.body;
 
 	if (
 		!event_id ||
@@ -30,38 +25,33 @@ const createEventController = (req, res) => {
 	}
 
 	const query = `
-        INSERT INTO events (
-        event_id,
-		event_name,
-		starting_date,
-		ending_date,
-		location
-        ) VALUES (?, ?, ?, ?, ?)
-    `;
+    UPDATE events 
+    SET 
+        event_name = ?, 
+        starting_date = ?, 
+        ending_date = ?, 
+        location = ?
+    WHERE 
+        event_id = ?
+`;
 
-	const values = [
-		event_id,
-		event_name,
-		starting_date,
-		ending_date,
-		location
-	];
+	const values = [event_id, event_name, starting_date, ending_date, location];
 
 	connection.query(query, values, (err, result) => {
 		if (err) {
-			console.error("Error adding event:", err);
+			console.error("Error updating event:", err);
 			return res.json({
 				success: false,
-				message: "Failed to add event",
+				message: "Failed to update event",
 				error: err.message,
 			});
 		}
 
 		return res.json({
 			success: true,
-			message: "Event added successfully",
+			message: "Event updated successfully",
 			data: { event_id },
 		});
 	});
 };
-module.exports = createEventController;
+module.exports = updateEventController;
